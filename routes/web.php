@@ -17,9 +17,11 @@ use App\Http\Controllers\ListingController;
 |
 */
 
+// LISTINGS
+
 Route::get('/', [ListingController::class, 'index']);
 
-Route::get('/listings/create', [ListingController::class, 'create']);
+Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
 
 Route::post('/listings', [ListingController::class, 'store']);
 
@@ -33,4 +35,12 @@ Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
 Route::get('/register', [UserController::class, 'create']);
 
+// USERS
+
 Route::post('/users', [UserController::class, 'store']);
+
+Route::post('/logout', [UserController::class, 'logout']);
+
+Route::get('/login', [UserController::class, 'login'])->name('login');
+
+Route::post('/users/authenticate', [UserController::class, 'authenticate']);
